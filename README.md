@@ -1,6 +1,6 @@
 # Gutenberg
-A sample application to load Gutenberg books list.
-<img src="screens/img1.jpg" style="float: left; margin-right: 10px;" width="200"/>       <img src="screens/img2.jpg" style="float: left; margin-left: 10px;" width="200"/> <img src="screens/img3.jpg" style="float: left; margin-left: 10px;" width="200"/> <img src="screens/img4.jpg" style="float: left; margin-left: 10px;" width="200"/></br>
+
+<img src="screens/img1.jpg" style="float: left; margin-right: 10px;" width="200"/>       <img src="screens/img2.jpg" style="float: left; margin-left: 10px;" width="200"/> <img src="screens/img3.jpg" style="float: left; margin-left: 10px;" width="200"/> <img src="screens/img4.jpg" style="float: left; margin-left: 10px;" width="200"/></br>A sample application to load Gutenberg books list.
 ## Features
   + Category List
   + Books List by Category
