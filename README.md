@@ -1,6 +1,6 @@
 # Gutenberg
 A sample application to load Gutenberg books list.
-<img src="screens/img1.png" style="float: left; margin-right: 10px;" width="200"/>       <img src="screens/img2.png" style="float: left; margin-left: 10px;" width="200"/> <img src="screens/img3.png" style="float: left; margin-left: 10px;" width="200"/> <img src="screens/img4.png" style="float: left; margin-left: 10px;" width="200"/> <img src="screens/img5.png" style="float: left; margin-left: 10px;" width="200"/></br>An application which displays meals filtered by ingredients. It also allows to search meals and displays recipe for the selected meal.
+<img src="screens/img1.jpg" style="float: left; margin-right: 10px;" width="200"/>       <img src="screens/img2.jpg" style="float: left; margin-left: 10px;" width="200"/> <img src="screens/img3.jpg" style="float: left; margin-left: 10px;" width="200"/> <img src="screens/img4.jpg" style="float: left; margin-left: 10px;" width="200"/></br>
 ## Features
   + Category List
   + Books List by Category
