@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Gutenberg</string>
+    <string name="retry">ERROR !! Tap to retry.</string>
+    <string name="category_icon">Category icon</string>
+    <string name="arrow">Next arrow</string>
+    <string name="book_cover">Book cover image</string>
+    <string name="error_can_not_open">No viewable version available</string>
+    <string name="error_title">Error</string>
+    <string name="ok">OK</string>
+    <string name="search">Search</string>
+
+</resources>
