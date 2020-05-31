@@ -18,16 +18,16 @@ import javax.inject.Singleton
  */
 
 @Module
-class RepositoryModule {
+open class RepositoryModule {
 
     @Provides
     @Singleton
     @Local
-    fun providesLocalDataSource(localDataSource: GutenbergLocalDataSource): GutenbergDataSource = localDataSource
+    open fun providesLocalDataSource(localDataSource: GutenbergLocalDataSource): GutenbergDataSource = localDataSource
 
     @Provides
     @Singleton
     @Remote
-    fun providesRemoteDataSource(remoteDataSource: GutenbergRemoteDataSource): GutenbergDataSource = remoteDataSource
+    open fun providesRemoteDataSource(remoteDataSource: GutenbergRemoteDataSource): GutenbergDataSource = remoteDataSource
 
 }

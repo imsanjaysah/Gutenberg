@@ -44,6 +44,7 @@ ext {
     crashLyticsVersion = "2.6.8@aar"
     leakCanaryVersion = "1.6.2"
     daggerVersion = "2.16"
+    dexMakerVersion = '2.12.1'
     rxJavaVersion = '2.0.2'
     rxKotlinVersion = '2.1.0'
     rxAndroidVersion = '2.1.1'
@@ -58,6 +59,7 @@ ext {
     okHttpVersion = '3.8.1'
     rxAndroidBleVersion = "1.7.0"
     multidexVersion = "1.0.3"
+    androidXTestExtKotlinRunnerVersion = '1.1.1'
 
     //Testing
     robolectricVersion = '3.4.2'

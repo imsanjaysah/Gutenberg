@@ -13,8 +13,8 @@ import com.sanjay.gutenberg.injection.module.ApiServiceModule
 import com.sanjay.gutenberg.injection.module.AppModule
 import com.sanjay.gutenberg.injection.module.RepositoryModule
 
-class GutenbergApplication : Application() {
-    lateinit var appComponent: AppComponent
+open class GutenbergApplication : Application() {
+    open lateinit var appComponent: AppComponent
 
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(base)
