@@ -16,7 +16,7 @@
   + Retrofit2 for REST API call
   + Offline support
   + Dagger2 for Dependcy Injection
-  + Coroutine for Asynchronous prograaming
+  + Coroutine for Asynchronous programming
   + Paging library for pagination
   + ConstraintLayout
   + Unit test cases 
