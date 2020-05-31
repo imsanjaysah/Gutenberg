@@ -5,6 +5,7 @@
   + Category List
   + Books List by Category
   + Search Books
+  + Open book in browser (Html, PDF, TXT)
 
 ##### Getting Started
 ### Highlights
@@ -15,10 +16,11 @@
   + Retrofit2 for REST API call
   + Offline support
   + Dagger2 for Dependcy Injection
-  + RxJava2 for Reactive programming
+  + Coroutine for Asynchronous prograaming
   + Paging library for pagination
   + ConstraintLayout
   + Unit test cases 
+  + Integration test cases
 ### Pre-requisites
   + Android Studio v3.6
   + Kotlin v1.3.72
@@ -30,7 +32,7 @@
 To run the project, clone the repository and run it via Android Studio.
 
 ## Test cases
-To run the test cases, run the test folder.
+To run the test cases, run the test and androidTest folder.
 
 ## Notes
 To test the offline behavior first open the app with internet connectivity, wait for data to get loaded. Close the app or go back to any previous screen, turn off the internet and open the app or go to the next page, app should load the data from cache.
