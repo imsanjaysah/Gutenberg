@@ -40,6 +40,7 @@ ext {
     supportLibVersion = "1.1.0"
     materialVersion = "1.2.0-alpha06"
     constraintLayoutVersion = "2.0.0-beta6"
+    coroutinesVersion = '1.2.1'
     crashLyticsVersion = "2.6.8@aar"
     leakCanaryVersion = "1.6.2"
     daggerVersion = "2.16"
@@ -52,7 +53,7 @@ ext {
     archVersion = '2.2.0'
     roomVersion = '2.2.5'
     timberVersion = '4.7.0'
-    retrofitVersion = '2.3.0'
+    retrofitVersion = '2.8.1'
     gsonVersion = '2.8.1'
     okHttpVersion = '3.8.1'
     rxAndroidBleVersion = "1.7.0"

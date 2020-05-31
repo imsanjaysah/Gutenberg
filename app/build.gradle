@@ -116,12 +116,20 @@ android {
         exclude 'META-INF/ASL2.0'
         exclude 'META-INF/NOTICE'
         exclude 'META-INF/LICENSE'
-        exclude 'META-INF/rxjava.properties'
     }
     lintOptions {
         quiet true
         abortOnError false
         ignoreWarnings true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 }
 
@@ -148,6 +156,8 @@ dependencies {
     implementation "androidx.annotation:annotation:$androidxAnnotationVersion"
     implementation "com.google.android.material:material:$materialVersion"
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+
 
     //Leakcanary to identify the memory leaks
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
@@ -161,13 +171,12 @@ dependencies {
     implementation "javax.inject:javax.inject:$javaxInjectVersion"
 
     //Reactive Programming
-    implementation "io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion"
-    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
     implementation 'com.jakewharton.rxbinding3:rxbinding:3.1.0'
 
     //Architecture Framework
     implementation "androidx.lifecycle:lifecycle-runtime:$archVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:$archVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$archVersion"
     implementation "androidx.paging:paging-runtime:2.1.2"
     kapt "androidx.lifecycle:lifecycle-compiler:$archVersion"
 
@@ -175,7 +184,6 @@ dependencies {
     //ORM Framework
     implementation "androidx.room:room-runtime:$roomVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
-    implementation "androidx.room:room-rxjava2:$roomVersion"
 
     //Networking Framework
     implementation "com.google.code.gson:gson:$gsonVersion"
@@ -183,7 +191,6 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
 
     //Image loading Framework
     implementation 'com.squareup.picasso:picasso:2.71828'

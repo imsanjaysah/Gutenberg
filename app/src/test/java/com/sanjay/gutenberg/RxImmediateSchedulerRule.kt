@@ -1,3 +1,4 @@
+/*
 package com.sanjay.gutenberg
 
 import io.reactivex.Scheduler
@@ -43,4 +44,4 @@ class RxImmediateSchedulerRule : TestRule {
             }
         }
     }
-}
+}*/

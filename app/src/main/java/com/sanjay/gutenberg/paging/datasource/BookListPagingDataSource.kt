@@ -3,18 +3,24 @@ package com.sanjay.gutenberg.paging.datasource
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
 import com.sanjay.gutenberg.constants.State
+import com.sanjay.gutenberg.data.Result
 import com.sanjay.gutenberg.data.repository.GutenbergRepository
 import com.sanjay.gutenberg.data.repository.remote.model.Book
-import com.sanjay.gutenberg.data.repository.remote.model.BookFormat
 import com.sanjay.gutenberg.extensions.addToCompositeDisposable
+import com.sanjay.gutenberg.injection.module.MainCoroutineScope
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.Action
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class BookListPagingDataSource @Inject constructor(private val repository: GutenbergRepository) :
+class BookListPagingDataSource @Inject constructor(
+    private val repository: GutenbergRepository,
+    @MainCoroutineScope private val scope: CoroutineScope
+) :
     PageKeyedDataSource<Int, Book>() {
     val disposable = CompositeDisposable()
 
@@ -55,7 +61,7 @@ class BookListPagingDataSource @Inject constructor(private val repository: Guten
         val currentPage = 1
         val nextPage = currentPage + 1
         //Call api
-        repository.searchBooks(currentPage, category.value!!, searchQuery.value)
+        /*repository.searchBooks(currentPage, category.value!!, searchQuery.value)
             .subscribe(
                 { books ->
                     updateState(State.DONE)
@@ -66,7 +72,22 @@ class BookListPagingDataSource @Inject constructor(private val repository: Guten
                     updateState(State.ERROR)
                     setRetry(Action { loadInitial(params, callback) })
                 }
-            ).addToCompositeDisposable(disposable)
+            ).addToCompositeDisposable(disposable)*/
+        scope.launch {
+            repository.searchBooks(currentPage, category.value!!, searchQuery.value).let {
+                when (it) {
+                    is Result.Success -> {
+                        updateState(State.DONE)
+                        callback.onResult(it.data, null, nextPage)
+                    }
+                    is Result.Error -> {
+                        updateState(State.ERROR)
+                        setRetry(Action { loadInitial(params, callback) })
+                    }
+                }
+            }
+        }
+
     }
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Book>) {
@@ -74,7 +95,7 @@ class BookListPagingDataSource @Inject constructor(private val repository: Guten
         val currentPage = params.key
         val nextPage = currentPage + 1
         //Call api
-        repository.searchBooks(currentPage, category.value!!, searchQuery.value)
+        /*repository.searchBooks(currentPage, category.value!!, searchQuery.value)
             .subscribe(
                 { books ->
                     updateState(State.DONE)
@@ -85,7 +106,22 @@ class BookListPagingDataSource @Inject constructor(private val repository: Guten
                     updateState(State.ERROR)
                     setRetry(Action { loadAfter(params, callback) })
                 }
-            ).addToCompositeDisposable(disposable)
+            ).addToCompositeDisposable(disposable)*/
+
+        scope.launch {
+            repository.searchBooks(currentPage, category.value!!, searchQuery.value).let {
+                when (it) {
+                    is Result.Success -> {
+                        updateState(State.DONE)
+                        callback.onResult(it.data, nextPage)
+                    }
+                    is Result.Error -> {
+                        updateState(State.ERROR)
+                        setRetry(Action { loadAfter(params, callback) })
+                    }
+                }
+            }
+        }
     }
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, Book>) {

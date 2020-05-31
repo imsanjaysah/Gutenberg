@@ -7,6 +7,7 @@ package com.sanjay.gutenberg.ui.book_list
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
+import androidx.lifecycle.viewModelScope
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.sanjay.gutenberg.data.repository.remote.model.Book
@@ -14,6 +15,7 @@ import com.sanjay.gutenberg.data.repository.remote.model.BookFormat
 import com.sanjay.gutenberg.paging.factory.BookListPagingDataSourceFactory
 import com.sanjay.gutenberg.ui.BaseViewModel
 import com.sanjay.gutenberg.utils.Utility.sortBookFormat
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -52,6 +54,7 @@ class BooksListViewModel @Inject constructor(
     fun sortBookFormatOrder() {
         sortedBookFormats = sortBookFormat(booksList?.value!!)
     }
+
 
     //Retrying the API call
     fun retry() {

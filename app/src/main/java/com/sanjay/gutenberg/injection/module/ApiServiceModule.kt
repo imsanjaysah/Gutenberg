@@ -18,10 +18,8 @@ import dagger.Module
 import dagger.Provides
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.CallAdapter
 import retrofit2.Converter
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.util.concurrent.TimeUnit
@@ -118,20 +116,12 @@ open class ApiServiceModule {
 
     @Provides
     @Singleton
-    internal fun provideRxJavaAdapterFactory(): CallAdapter.Factory {
-        return RxJava2CallAdapterFactory.create()
-    }
-
-    @Provides
-    @Singleton
     internal fun provideRetrofit(
-        @Named(BASE_URL) baseUrl: String, converterFactory: Converter.Factory,
-        callAdapterFactory: CallAdapter.Factory, client: OkHttpClient
+        @Named(BASE_URL) baseUrl: String, converterFactory: Converter.Factory, client: OkHttpClient
     ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(converterFactory)
-            .addCallAdapterFactory(callAdapterFactory)
             .client(client)
             .build()
     }

@@ -4,8 +4,8 @@
 
 package com.sanjay.gutenberg.data.repository
 
+import com.sanjay.gutenberg.data.Result
 import com.sanjay.gutenberg.data.repository.remote.model.Book
-import io.reactivex.Flowable
 
 /**
  *
@@ -13,5 +13,5 @@ import io.reactivex.Flowable
  * @author Sanjay Sah
  */
 interface GutenbergDataSource {
-    fun searchBooks(page: Int, category: String, query: String?): Flowable<List<Book>>
+    suspend fun searchBooks(page: Int, category: String, query: String?): Result<List<Book>>
 }

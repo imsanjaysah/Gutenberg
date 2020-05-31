@@ -4,6 +4,7 @@
 
 package com.sanjay.gutenberg.data.repository.local
 
+import com.sanjay.gutenberg.data.Result
 import com.sanjay.gutenberg.data.repository.GutenbergDataSource
 import com.sanjay.gutenberg.data.repository.remote.model.Book
 import io.reactivex.Flowable
@@ -15,8 +16,11 @@ import javax.inject.Inject
  * @author Sanjay Sah
  */
 class GutenbergLocalDataSource @Inject constructor() : GutenbergDataSource {
-
-    override fun searchBooks(page: Int, category: String, query: String?): Flowable<List<Book>> {
+    override suspend fun searchBooks(
+        page: Int,
+        category: String,
+        query: String?
+    ): Result<List<Book>> {
         TODO("Not yet implemented")
     }
 
