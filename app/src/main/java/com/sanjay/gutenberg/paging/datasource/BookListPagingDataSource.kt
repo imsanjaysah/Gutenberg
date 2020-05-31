@@ -6,13 +6,8 @@ import com.sanjay.gutenberg.constants.State
 import com.sanjay.gutenberg.data.Result
 import com.sanjay.gutenberg.data.repository.GutenbergRepository
 import com.sanjay.gutenberg.data.repository.remote.model.Book
-import com.sanjay.gutenberg.extensions.addToCompositeDisposable
 import com.sanjay.gutenberg.injection.module.MainCoroutineScope
-import io.reactivex.Completable
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.functions.Action
-import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -29,23 +24,20 @@ class BookListPagingDataSource @Inject constructor(
     var searchQuery = MutableLiveData<String>()
     var category = MutableLiveData<String>()
 
-    //Completable required for retrying the API call which gets failed due to any error like no internet
-    private var retryCompletable: Completable? = null
+    //Variable required for retrying the API call which gets failed due to any error like no internet
+    private var _retry: (() -> Unit)? = null
 
     /**
-     * Creating the observable for specific page to call the API
+     * Creating the lambda expression for specific page to call the API
      */
-    private fun setRetry(action: Action?) {
-        retryCompletable = if (action == null) null else Completable.fromAction(action)
+    private fun setRetry(function: (() -> Unit)?) {
+        this._retry = function
     }
 
     //Retrying the API call
     fun retry() {
-        if (retryCompletable != null) {
-            retryCompletable!!
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe().addToCompositeDisposable(disposable)
+        scope.launch {
+            _retry?.invoke()
         }
     }
 
@@ -82,7 +74,7 @@ class BookListPagingDataSource @Inject constructor(
                     }
                     is Result.Error -> {
                         updateState(State.ERROR)
-                        setRetry(Action { loadInitial(params, callback) })
+                        setRetry { loadInitial(params, callback) }
                     }
                 }
             }
@@ -117,7 +109,7 @@ class BookListPagingDataSource @Inject constructor(
                     }
                     is Result.Error -> {
                         updateState(State.ERROR)
-                        setRetry(Action { loadAfter(params, callback) })
+                        setRetry { loadAfter(params, callback) }
                     }
                 }
             }

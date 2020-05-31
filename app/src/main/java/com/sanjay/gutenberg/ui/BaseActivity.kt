@@ -14,13 +14,11 @@ import androidx.annotation.CallSuper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
-import com.sanjay.GutenbergApplication
+import com.sanjay.gutenberg.GutenbergApplication
 import com.sanjay.gutenberg.R
 import com.sanjay.gutenberg.eventbus.RxBus
 import com.sanjay.gutenberg.injection.ActivityComponent
 import com.sanjay.gutenberg.injection.module.ActivityModule
-
-import io.reactivex.disposables.CompositeDisposable
 
 
 /**

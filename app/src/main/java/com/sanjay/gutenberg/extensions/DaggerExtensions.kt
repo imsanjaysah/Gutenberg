@@ -5,7 +5,7 @@
 
 package com.sanjay.gutenberg.extensions
 import android.content.Context
-import com.sanjay.GutenbergApplication
+import com.sanjay.gutenberg.GutenbergApplication
 
 /**
  * Created by Sanjay Sah

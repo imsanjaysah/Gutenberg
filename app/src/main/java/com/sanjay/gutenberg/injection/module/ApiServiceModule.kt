@@ -9,7 +9,7 @@ package com.sanjay.gutenberg.injection.module
 import android.content.Context
 import android.net.ConnectivityManager
 import android.util.Log
-import com.sanjay.GutenbergApplication
+import com.sanjay.gutenberg.GutenbergApplication
 import com.sanjay.gutenberg.BuildConfig
 import com.sanjay.gutenberg.data.api.GutenbergService
 import com.sanjay.gutenberg.data.api.HeaderInterceptor

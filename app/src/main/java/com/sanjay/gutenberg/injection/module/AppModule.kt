@@ -7,7 +7,7 @@ package com.sanjay.gutenberg.injection.module
 
 
 import android.content.Context
-import com.sanjay.GutenbergApplication
+import com.sanjay.gutenberg.GutenbergApplication
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

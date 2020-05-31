@@ -1,4 +1,3 @@
-/*
 package com.sanjay.gutenberg.pagination.datasource
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
@@ -8,19 +7,26 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
-import com.sanjay.gutenberg.RxImmediateSchedulerRule
 import com.sanjay.gutenberg.constants.State
+import com.sanjay.gutenberg.data.Result
 import com.sanjay.gutenberg.data.repository.GutenbergRepository
 import com.sanjay.gutenberg.data.repository.remote.model.Book
 import com.sanjay.gutenberg.paging.datasource.BookListPagingDataSource
-
-import io.reactivex.Flowable
-import org.junit.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.test.runBlockingTest
+import org.junit.After
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
 import org.mockito.ArgumentCaptor
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import kotlin.test.assertEquals
 
+@ExperimentalCoroutinesApi
 class BookListPagingDataSourceTest {
 
     private var pagingDataSource: BookListPagingDataSource? = null
@@ -38,22 +44,18 @@ class BookListPagingDataSourceTest {
     @Mock
     lateinit var loadCallback: PageKeyedDataSource.LoadCallback<Int, Book>
 
-    companion object {
-        @ClassRule
-        @JvmField
-        val schedulers = RxImmediateSchedulerRule()
-    }
+    var coroutineScope: CoroutineScope = CoroutineScope(Job() + Dispatchers.Unconfined)
 
-    @Rule
-    @JvmField
-    val rule = InstantTaskExecutorRule()
+
+    @get:Rule
+    var instantExecutorRule = InstantTaskExecutorRule()
 
     private var observerState = mock<Observer<State>>()
 
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        pagingDataSource = BookListPagingDataSource(repository)
+        pagingDataSource = BookListPagingDataSource(repository, coroutineScope)
     }
 
     @After
@@ -62,16 +64,16 @@ class BookListPagingDataSourceTest {
     }
 
     @Test
-    fun loadInitial_Success() {
+    fun loadInitial_Success() = runBlockingTest {
         val booksList = emptyList<Book>()
-        val observable = Flowable.just(booksList)
+        val booksListResult = Result.Success(booksList)
         val category = "Fiction"
         val searchQuery = "The"
         pagingDataSource!!.category.value = category
         pagingDataSource!!.searchQuery.value = searchQuery
 
         whenever(repository.searchBooks(1, category, searchQuery)).thenReturn(
-            observable
+            booksListResult
         )
 
         pagingDataSource!!.state.observeForever(observerState)
@@ -93,16 +95,16 @@ class BookListPagingDataSourceTest {
     }
 
     @Test
-    fun loadInitial_Error() {
+    fun loadInitial_Error() = runBlockingTest {
         val errorMessage = "Error response"
-        val response = Throwable(errorMessage)
+        val response = Exception(errorMessage)
         val category = "Fiction"
         val searchQuery = "The"
         pagingDataSource!!.category.value = category
         pagingDataSource!!.searchQuery.value = searchQuery
 
         whenever(repository.searchBooks(1, category, searchQuery)).thenReturn(
-            Flowable.error(response)
+            Result.Error(response)
         )
 
         pagingDataSource!!.state.observeForever(observerState)
@@ -125,16 +127,16 @@ class BookListPagingDataSourceTest {
     }
 
     @Test
-    fun loadInitial_Retry() {
+    fun loadInitial_Retry() = runBlockingTest {
         val errorMessage = "Error response"
-        val response = Throwable(errorMessage)
+        val response = Exception(errorMessage)
         val category = "Fiction"
         val searchQuery = "The"
         pagingDataSource!!.category.value = category
         pagingDataSource!!.searchQuery.value = searchQuery
 
         whenever(repository.searchBooks(1, category, searchQuery)).thenReturn(
-            Flowable.error(response)
+            Result.Error(response)
         )
 
         pagingDataSource!!.state.observeForever(observerState)
@@ -145,4 +147,4 @@ class BookListPagingDataSourceTest {
 
         verify(repository, times(2)).searchBooks(1, category, searchQuery)
     }
-}*/
+}

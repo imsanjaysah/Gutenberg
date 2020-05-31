@@ -208,6 +208,9 @@ dependencies {
     testImplementation "androidx.test:runner:$runnerVersion"
     testImplementation "androidx.test:rules:$runnerVersion"
 
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
+
+
     //UI Testing Framework
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"

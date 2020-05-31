@@ -7,7 +7,6 @@ package com.sanjay.gutenberg.data.repository.local
 import com.sanjay.gutenberg.data.Result
 import com.sanjay.gutenberg.data.repository.GutenbergDataSource
 import com.sanjay.gutenberg.data.repository.remote.model.Book
-import io.reactivex.Flowable
 import javax.inject.Inject
 
 /**

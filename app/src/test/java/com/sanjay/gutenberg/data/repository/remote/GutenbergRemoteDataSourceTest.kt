@@ -6,7 +6,8 @@ import com.nhaarman.mockitokotlin2.whenever
 import com.sanjay.gutenberg.data.api.GutenbergService
 import com.sanjay.gutenberg.data.repository.remote.model.Book
 import com.sanjay.gutenberg.data.repository.remote.model.BooksResponse
-import io.reactivex.Single
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.CoreMatchers.instanceOf
 import org.junit.After
 import org.junit.Assert.assertThat
@@ -15,7 +16,9 @@ import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
+import retrofit2.Response
 
+@ExperimentalCoroutinesApi
 class GutenbergRemoteDataSourceTest {
 
     @Mock
@@ -42,12 +45,12 @@ class GutenbergRemoteDataSourceTest {
     }
 
     @Test
-    fun getBooks() {
+    fun getBooks() = runBlockingTest {
         val booksList = emptyList<Book>()
         val booksResponse = BooksResponse(booksList)
-        val observable = Single.just(booksResponse)
+        val response = Response.success(booksResponse)
 
-        whenever(apiService.searchBooks("Fiction", "", 1)).thenReturn(observable)
+        whenever(apiService.searchBooks("Fiction", "", 1)).thenReturn(response)
 
         remoteDataSource?.searchBooks(1, "Fiction", "")
 
@@ -55,7 +58,7 @@ class GutenbergRemoteDataSourceTest {
 
         assertThat(
             apiService.searchBooks("Fiction", "", 1),
-            instanceOf(Single::class.java)
+            instanceOf(Response::class.java)
         )
     }
 }
