@@ -60,6 +60,10 @@ ext {
     rxAndroidBleVersion = "1.7.0"
     multidexVersion = "1.0.3"
     androidXTestExtKotlinRunnerVersion = '1.1.1'
+    rxBindingVersion = '3.1.0'
+    pagingVersion = '2.1.2'
+    picassoVersion = '2.71828'
+    archTestVersion = '2.1.0'
 
     //Testing
     robolectricVersion = '3.4.2'
@@ -69,7 +73,8 @@ ext {
     dexmakerVersion = '1.0'
     espressoVersion = '3.1.1'
     testingSupportLibVersion = '0.1'
-    mockitoKotlinVersion = '1.5.0'
+    mockitoKotlinVersion = '2.1.0'
+    testCoreKtxVersion = '1.2.0'
     mockitoAndroidVersion = '2.8.47'
     androidSupportRunnerVersion = '1.0.0'
     androidSupportRulesVersion = '1.0.0'

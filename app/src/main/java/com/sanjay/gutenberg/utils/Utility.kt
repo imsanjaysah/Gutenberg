@@ -18,6 +18,7 @@ import com.sanjay.gutenberg.data.repository.remote.model.BookFormat
  */
 
 object Utility {
+    //Function to sort the Book format based on max format count
     fun sortBookFormat(books: PagedList<Book>): Map<BookFormat, Int> {
         var htmlFormatCount = 0
         var pdfFormatCount = 0
@@ -34,7 +35,6 @@ object Utility {
                 txtFormatCount++
             }
         }
-        Log.d("Html format count", "$htmlFormatCount");
         bookFormatSymbols[BookFormat.HTML] = htmlFormatCount
         bookFormatSymbols[BookFormat.PDF] = pdfFormatCount
         bookFormatSymbols[BookFormat.TXT] = txtFormatCount

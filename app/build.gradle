@@ -171,13 +171,13 @@ dependencies {
     implementation "javax.inject:javax.inject:$javaxInjectVersion"
 
     //Reactive Programming
-    implementation 'com.jakewharton.rxbinding3:rxbinding:3.1.0'
+    implementation "com.jakewharton.rxbinding3:rxbinding:$rxBindingVersion"
 
     //Architecture Framework
     implementation "androidx.lifecycle:lifecycle-runtime:$archVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:$archVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$archVersion"
-    implementation "androidx.paging:paging-runtime:2.1.2"
+    implementation "androidx.paging:paging-runtime:$pagingVersion"
     kapt "androidx.lifecycle:lifecycle-compiler:$archVersion"
 
 
@@ -192,20 +192,15 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
 
-    implementation "androidx.core:core-ktx:1.3.0"
-
     //Image loading Framework
-    implementation 'com.squareup.picasso:picasso:2.71828'
-
-    //Multidex
-    implementation "com.android.support:multidex:$multidexVersion"
+    implementation "com.squareup.picasso:picasso:$picassoVersion"
 
     //Unit Testing Framework
     testImplementation "junit:junit:$jUnitVersion"
-    testImplementation "androidx.arch.core:core-testing:2.1.0"
+    testImplementation "androidx.arch.core:core-testing:$archTestVersion"
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
     testImplementation "org.assertj:assertj-core:$assertJVersion"
-    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoKotlinVersion"
     testImplementation "org.mockito:mockito-core:$mockitoAndroidVersion"
     testImplementation "androidx.test:runner:$runnerVersion"
     testImplementation "androidx.test:rules:$runnerVersion"
@@ -214,12 +209,10 @@ dependencies {
 
 
     //UI Testing Framework
-    androidTestImplementation 'androidx.test:core-ktx:1.2.0'
+    androidTestImplementation "androidx.test:core-ktx:$testCoreKtxVersion"
     androidTestImplementation "androidx.test.ext:junit:$androidXTestExtKotlinRunnerVersion"
     androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
     androidTestImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
-
     androidTestImplementation "com.linkedin.dexmaker:dexmaker-mockito:$dexMakerVersion"
 }
